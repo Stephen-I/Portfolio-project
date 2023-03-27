@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const { viewCategories } = require("../controllers/testApp.controller");
+const { viewCategories, getMessage } = require("./controllers/app.controller");
 
 app.use(express.json());
 

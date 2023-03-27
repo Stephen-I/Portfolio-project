@@ -4,7 +4,7 @@ const {
   comments,
   reviews,
   users,
-} = require("../data/test-data/index");
+} = require("../data/development-data/index");
 
 exports.seeCategories = () => {
   return db.query("SELECT * FROM categories;").then(({ rows }) => rows);
