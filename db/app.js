@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
 
-const { viewCategories, getMessage } = require("./controllers/app.controller");
+const {
+  viewCategories,
+  getMessage,
+  viewReviews,
+} = require("./controllers/app.controller");
 
 app.use(express.json());
 
@@ -13,5 +17,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/api/categories", viewCategories);
+
+app.get("/api/reviews", viewReviews);
 
 module.exports = app;

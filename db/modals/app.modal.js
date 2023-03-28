@@ -9,3 +9,7 @@ const {
 exports.seeCategories = () => {
   return db.query("SELECT * FROM categories;").then(({ rows }) => rows);
 };
+
+exports.seeReviews = () => {
+  return db.query("SELECT * FROM reviews;").then(({ rows }) => rows);
+};
