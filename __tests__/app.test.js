@@ -3,6 +3,7 @@ const app = require("../db/app");
 const db = require("../db/connection");
 const seed = require("../db/seeds/seed");
 const testData = require("../db/data/test-data");
+const categories = require("../db/data/development-data/categories");
 
 beforeEach(() => seed(testData));
 afterAll(() => db.end());
@@ -30,6 +31,7 @@ describe("/api/app", () => {
       .expect(200)
       .then(({ body }) => {
         body.categories.forEach((category) => {
+          expect(body.categories).toHaveLength(4);
           expect(category).toHaveProperty("slug");
           expect(category).toHaveProperty("description");
         });
