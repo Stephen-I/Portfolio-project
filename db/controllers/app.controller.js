@@ -1,4 +1,4 @@
-const { seeCategories, seeReviews } = require("../modals/app.modal");
+const { seeCategories, seeReviewsById } = require("../modals/app.modal");
 
 exports.getMessage = (req, res) => {
   res.status(200).send({ message: "all ok" });
@@ -10,8 +10,9 @@ exports.viewCategories = (req, res) => {
   });
 };
 
-exports.viewReviews = (req, res) => {
-  seeReviews().then((reviews) => {
-    res.status(200).send({ reviews });
-  });
+exports.viewReviewsById = (req, res, next) => {
+  const { review_id } = req.params;
+  seeReviewsById(review_id)
+    .then((review) => res.status(200).send({ review }))
+    .catch(next);
 };

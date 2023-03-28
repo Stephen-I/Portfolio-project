@@ -39,21 +39,19 @@ describe("/api/app", () => {
   });
   test("Reviews should have properties of title, designer, review_body, review_id, review_img_url, votes, owner, created_at, category", () => {
     return request(app)
-      .get("/api/reviews/:review_id")
+      .get("/api/reviews/5")
       .expect(200)
       .then(({ body }) => {
-        body.reviews.forEach((review) => {
-          expect(body.reviews).toHaveLength(13);
-          expect(review).toHaveProperty("title");
-          expect(review).toHaveProperty("designer");
-          expect(review).toHaveProperty("review_body");
-          expect(review).toHaveProperty("review_id");
-          expect(review).toHaveProperty("review_img_url");
-          expect(review).toHaveProperty("votes");
-          expect(review).toHaveProperty("category");
-          expect(review).toHaveProperty("created_at");
-          expect(review).toHaveProperty("owner");
-        });
+        console.log(body.review);
+        expect(body.review).toHaveProperty("title");
+        expect(body.review).toHaveProperty("designer");
+        expect(body.review).toHaveProperty("review_body");
+        expect(body.review).toHaveProperty("review_id");
+        expect(body.review).toHaveProperty("review_img_url");
+        expect(body.review).toHaveProperty("votes");
+        expect(body.review).toHaveProperty("category");
+        expect(body.review).toHaveProperty("created_at");
+        expect(body.review).toHaveProperty("owner");
       });
   });
 });
