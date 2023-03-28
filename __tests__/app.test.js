@@ -42,7 +42,7 @@ describe("/api/app", () => {
       .get("/api/reviews/5")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.review);
+        expect(body.review.review_id).toBe(5);
         expect(body.review).toHaveProperty("title");
         expect(body.review).toHaveProperty("designer");
         expect(body.review).toHaveProperty("review_body");
@@ -54,4 +54,22 @@ describe("/api/app", () => {
         expect(body.review).toHaveProperty("owner");
       });
   });
+  test("status:400, responds with an error message when passed a bad user ID", () => {
+    return request(app)
+      .get("/api/reviews/notAnID")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe(
+          'invalid input syntax for type integer: "notAnID"'
+        );
+      });
+  });
+  //   test("status:404, responds with an error message when path is invalid", () => {
+  //     return request(app)
+  //       .get("/api/r")
+  //       .expect(404)
+  //       .then(({ body }) => {
+  //         expect(body.msg).toBe("not found");
+  //       });
+  //   });
 });

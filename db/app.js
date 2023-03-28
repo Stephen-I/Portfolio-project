@@ -15,11 +15,14 @@ app.get("/api/categories", viewCategories);
 
 app.get("/api/reviews/:review_id", viewReviewsById);
 
-app.get("/not-a-route");
-
 app.use((err, req, res, next) => {
-  if (err.code === 404) {
-    res.status(404).send("Not found");
+  if (err.status && err.msg) {
+    res.status(err.status).send({ msg: err.msg });
+  } else if (err.code === "22P02") {
+    res.status(400).send({ msg: err.message || "Bad Request" });
+  } else {
+    console.log(err);
+    res.status(500).send({ msg: "Internal Server Error" });
   }
 });
 
