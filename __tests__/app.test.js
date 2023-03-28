@@ -5,6 +5,7 @@ const seed = require("../db/seeds/seed");
 const testData = require("../db/data/test-data");
 
 beforeEach(() => seed(testData));
+afterAll(() => db.end());
 
 describe("/api/app", () => {
   test("return request app", () => {
@@ -28,8 +29,10 @@ describe("/api/app", () => {
       .get("/api/categories")
       .expect(200)
       .then(({ body }) => {
-        expect(body.categories[0]).toHaveProperty("slug");
-        expect(body.categories[0]).toHaveProperty("description");
+        body.categories.forEach((category) => {
+          expect(category).toHaveProperty("slug");
+          expect(category).toHaveProperty("description");
+        });
       });
   });
 });
