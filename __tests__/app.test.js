@@ -39,7 +39,7 @@ describe("/api/app", () => {
   });
   test("Reviews should have properties of title, designer, review_body, review_id, review_img_url, votes, owner, created_at, category", () => {
     return request(app)
-      .get("/api/reviews")
+      .get("/api/reviews/:review_id")
       .expect(200)
       .then(({ body }) => {
         body.reviews.forEach((review) => {

@@ -11,6 +11,8 @@ app.use(express.json());
 
 app.get("/api", getMessage);
 
+app.get("/not-a-route");
+
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(404).send("Not found");
@@ -18,6 +20,6 @@ app.use((err, req, res, next) => {
 
 app.get("/api/categories", viewCategories);
 
-app.get("/api/reviews", viewReviews);
+app.get("/api/reviews/:review_id", viewReviews);
 
 module.exports = app;
