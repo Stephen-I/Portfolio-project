@@ -69,7 +69,7 @@ describe("/api/app", () => {
       .get("/api/r")
       .expect(404)
       .then(({ body }) => {
-        expect(body.msg).toBe("Query not found");
+        expect(body.msg).toBe("Path not found");
       });
   });
 });

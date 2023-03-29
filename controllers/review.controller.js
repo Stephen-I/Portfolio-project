@@ -8,5 +8,5 @@ exports.viewReviewsById = (req, res, next) => {
 };
 
 exports.notFoundErr = (req, res, next) => {
-  res.status(404).send({ msg: "Query not found" });
+  res.status(404).send({ msg: "Path not found" });
 };
