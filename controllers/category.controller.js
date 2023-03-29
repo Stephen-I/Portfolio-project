@@ -1,4 +1,4 @@
-const { seeCategories } = require("../modals/app.modal");
+const { seeCategories } = require("../models/category.model");
 
 exports.getMessage = (req, res) => {
   res.status(200).send({ message: "all ok" });
