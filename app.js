@@ -4,8 +4,12 @@ const app = express();
 const {
   viewCategories,
   getMessage,
+} = require("./controllers/category.controller");
+
+const {
   viewReviewsById,
-} = require("./controllers/app.controller");
+  notFoundErr,
+} = require("./controllers/review.controller");
 
 app.use(express.json());
 
@@ -14,6 +18,8 @@ app.get("/api", getMessage);
 app.get("/api/categories", viewCategories);
 
 app.get("/api/reviews/:review_id", viewReviewsById);
+
+app.get("/*", notFoundErr);
 
 app.use((err, req, res, next) => {
   if (err.status && err.msg) {
