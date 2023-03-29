@@ -4,5 +4,14 @@ const { reviews } = require("../db/data/development-data/index");
 exports.seeReviewsById = (review_id) => {
   return db
     .query("SELECT * FROM reviews WHERE review_id = $1", [review_id])
-    .then(({ rows }) => rows[0]);
+    .then(({ rows }) => {
+      const review = rows[0];
+      if (!review) {
+        return Promise.reject({
+          status: 404,
+          msg: `No review found for review_id: ${review_id}`,
+        });
+      }
+      return review;
+    });
 };

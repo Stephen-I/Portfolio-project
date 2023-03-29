@@ -72,4 +72,12 @@ describe("/api/app", () => {
         expect(body.msg).toBe("Path not found");
       });
   });
+  test("status:404, responds with an error message when passed unavailable ID", () => {
+    return request(app)
+      .get("/api/reviews/10000")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("No review found for review_id: 10000");
+      });
+  });
 });
