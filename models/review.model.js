@@ -15,3 +15,11 @@ exports.seeReviewsById = (review_id) => {
       return review;
     });
 };
+
+exports.groupReviewsAndComments = () => {
+  return db
+    .query(
+      "SELECT reviews.*, COUNT(reviews.review_id) AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id GROUP BY reviews.review_id;"
+    )
+    .then(({ rows }) => rows);
+};

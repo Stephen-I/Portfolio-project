@@ -1,4 +1,7 @@
-const { seeReviewsById } = require("../models/review.model");
+const {
+  seeReviewsById,
+  groupReviewsAndComments,
+} = require("../models/review.model");
 
 exports.viewReviewsById = (req, res, next) => {
   const { review_id } = req.params;
@@ -9,4 +12,10 @@ exports.viewReviewsById = (req, res, next) => {
 
 exports.notFoundErr = (req, res, next) => {
   res.status(404).send({ msg: "Path not found" });
+};
+
+exports.countComments = (req, res, next) => {
+  groupReviewsAndComments()
+    .then((reviews) => res.status(200).send({ reviews }))
+    .catch(next);
 };
