@@ -80,25 +80,25 @@ describe("/api/app", () => {
         expect(body.msg).toBe("No review found for review_id: 10000");
       });
   });
-//   test("Reviews should have properties of title, designer, review_body, review_id, review_img_url, votes, owner, created_at, category, comment_count", () => {
-//     return request(app)
-//       .get("/api/reviews")
-//       .expect(200)
-//       .then(({ body }) => {
-//         expect(body.reviews).toHaveLength(13);
-//         expect(body.reviews).toBeSortedBy("created_at", { descending: true });
-//         body.reviews.forEach((review) => {
-//           expect(review).toHaveProperty("title");
-//           expect(review).toHaveProperty("designer");
-//           expect(review).toHaveProperty("review_body");
-//           expect(review).toHaveProperty("review_id");
-//           expect(review).toHaveProperty("review_img_url");
-//           expect(review).toHaveProperty("votes");
-//           expect(review).toHaveProperty("category");
-//           expect(review).toHaveProperty("created_at");
-//           expect(review).toHaveProperty("owner");
-//           expect(review).toHaveProperty("comment_count");
-//         });
-      });
-  });
+  //   test("Reviews should have properties of title, designer, review_body, review_id, review_img_url, votes, owner, created_at, category, comment_count", () => {
+  //     return request(app)
+  //       .get("/api/reviews")
+  //       .expect(200)
+  //       .then(({ body }) => {
+  //         expect(body.reviews).toHaveLength(13);
+  //         expect(body.reviews).toBeSortedBy("created_at", { descending: true });
+  //         body.reviews.forEach((review) => {
+  //           expect(review).toHaveProperty("title");
+  //           expect(review).toHaveProperty("designer");
+  //           expect(review).toHaveProperty("review_body");
+  //           expect(review).toHaveProperty("review_id");
+  //           expect(review).toHaveProperty("review_img_url");
+  //           expect(review).toHaveProperty("votes");
+  //           expect(review).toHaveProperty("category");
+  //           expect(review).toHaveProperty("created_at");
+  //           expect(review).toHaveProperty("owner");
+  //           expect(review).toHaveProperty("comment_count");
+  //         });
+  //       });
+  //   });
 });
