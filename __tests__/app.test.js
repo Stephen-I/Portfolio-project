@@ -105,8 +105,9 @@ describe("/api/app", () => {
       .get("/api/reviews/3/comments")
       .expect(200)
       .then(({ body }) => {
-        expect(body.comment.length).toBe(3);
-        body.comment.forEach((comment) => {
+        console.log(body.comments);
+        expect(body.comments.length).toBe(3);
+        body.comments.forEach((comment) => {
           expect(comment).toHaveProperty("author");
           expect(comment).toHaveProperty("comment_id");
           expect(comment).toHaveProperty("review_id");
@@ -121,7 +122,7 @@ describe("/api/app", () => {
       .get("/api/reviews/5/comments")
       .expect(200)
       .then(({ body }) => {
-        expect(body.comment.length).toBe(0);
+        expect(body.comments.length).toBe(0);
       });
   });
 });
