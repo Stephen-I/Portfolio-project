@@ -97,6 +97,7 @@ describe("/api/app", () => {
           expect(review).toHaveProperty("created_at");
           expect(review).toHaveProperty("owner");
           expect(review).toHaveProperty("comment_count");
+          //   expect(review).toBeSorted("created_at", { descending: true });
         });
       });
   });
