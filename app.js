@@ -9,6 +9,7 @@ const {
 const {
   viewReviewsById,
   notFoundErr,
+  countComments,
 } = require("./controllers/review.controller");
 
 app.use(express.json());
@@ -18,6 +19,8 @@ app.get("/api", getMessage);
 app.get("/api/categories", viewCategories);
 
 app.get("/api/reviews/:review_id", viewReviewsById);
+
+app.get("/api/reviews", countComments);
 
 app.get("/*", notFoundErr);
 
