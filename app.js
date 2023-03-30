@@ -24,7 +24,7 @@ app.get("/api/reviews/:review_id", viewReviewsById);
 
 app.get("/api/reviews", countComments);
 
-app.get("/api/reviews/review_id/comments", viewComments);
+app.get("/api/reviews/:review_id/comments", viewComments);
 
 app.get("/*", notFoundErr);
 
