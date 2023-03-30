@@ -104,4 +104,46 @@ describe("/api/app", () => {
         });
       });
   });
+  test("Search for Comments using review_id with properties of body, review_id, votes, comment_id, created_at, author", () => {
+    return request(app)
+      .get("/api/reviews/3/comments")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments.length).toBe(3);
+        body.comments.forEach((comment) => {
+          expect(comment).toHaveProperty("author");
+          expect(comment).toHaveProperty("comment_id");
+          expect(comment).toHaveProperty("review_id");
+          expect(comment).toHaveProperty("votes");
+          expect(comment).toHaveProperty("created_at");
+          expect(comment).toHaveProperty("body");
+        });
+      });
+  });
+  test("return empty array if there are no comments for chosen id", () => {
+    return request(app)
+      .get("/api/reviews/5/comments")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments.length).toBe(0);
+      });
+  });
+  test("status:400, responds with an error message when passed a bad user ID", () => {
+    return request(app)
+      .get("/api/reviews/notAnID/comments")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe(
+          'invalid input syntax for type integer: "notAnID"'
+        );
+      });
+  });
+  test("status:404, responds with an error message when passed unavailable ID", () => {
+    return request(app)
+      .get("/api/reviews/10000/comments")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("No reviews found for review_id: 10000");
+      });
+  });
 });
