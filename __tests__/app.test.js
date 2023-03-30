@@ -86,6 +86,7 @@ describe("/api/app", () => {
       .expect(200)
       .then(({ body }) => {
         expect(body.reviews).toHaveLength(13);
+        expect(body.reviews).toBeSorted("created_at", { descending: true });
         body.reviews.forEach((review) => {
           expect(review).toHaveProperty("title");
           expect(review).toHaveProperty("designer");
@@ -97,7 +98,6 @@ describe("/api/app", () => {
           expect(review).toHaveProperty("created_at");
           expect(review).toHaveProperty("owner");
           expect(review).toHaveProperty("comment_count");
-          //   expect(review).toBeSorted("created_at", { descending: true });
         });
       });
   });
