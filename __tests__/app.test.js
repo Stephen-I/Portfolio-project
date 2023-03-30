@@ -100,4 +100,18 @@ describe("/api/app", () => {
         });
       });
   });
+  //   test("Search for Comments using review_id with properties of body, review_id, votes, comment_id, created_at, author", () => {
+  //     return request(app)
+  //       .get("/api/reviews/5/comments")
+  //       .expect(200)
+  //       .then(({ body }) => {
+  //         expect(body.comment.review_id).toBe(5);
+  //         expect(body.comment).toHaveProperty("author");
+  //         expect(body.comment).toHaveProperty("comment_id");
+  //         expect(body.comment).toHaveProperty("review_id");
+  //         expect(body.comment).toHaveProperty("votes");
+  //         expect(body.comment).toHaveProperty("created_at");
+  //         expect(body.comment).toHaveProperty("body");
+  //       });
+  //   });
 });
