@@ -185,13 +185,19 @@ describe(".post", () => {
     return request(app)
       .post("/api/reviews/5/comments")
       .send({ username: "mallionaire" })
-      .expect(500);
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Missing required input");
+      });
   });
   test("if username is missing, display 500 error", () => {
     return request(app)
       .post("/api/reviews/5/comments")
       .send({ body: "hi i'm mallionaire" })
-      .expect(500);
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Missing required input");
+      });
   });
   test("status:400, responds with an error message when passed a bad user ID", () => {
     return request(app)
