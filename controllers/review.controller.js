@@ -1,6 +1,7 @@
 const {
   seeReviewsById,
   groupReviewsAndComments,
+  modifyReview,
 } = require("../models/review.model");
 
 exports.viewReviewsById = (req, res, next) => {
@@ -18,4 +19,8 @@ exports.countComments = (req, res, next) => {
   groupReviewsAndComments()
     .then((reviews) => res.status(200).send({ reviews }))
     .catch(next);
+};
+
+exports.incrementVotes = (req, res) => {
+  modifyReview().then((review) => res.status(200).send({ review }));
 };
