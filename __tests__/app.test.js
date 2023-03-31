@@ -146,4 +146,13 @@ describe("/api/app", () => {
         expect(body.msg).toBe("No reviews found for review_id: 10000");
       });
   });
+  //   test("Should delete specified comment and respond with 204 status", () => {
+  //     return request(app)
+  //       .delete("/api/comments/1")
+  //       .expect(204)
+  //       .then((body) => {
+  //         console.log(body);
+  //         expect(body.length).toBe(5);
+  //       });
+  //   });
 });
