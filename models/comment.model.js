@@ -24,7 +24,6 @@ exports.seeCommentsById = (review_id) => {
 };
 
 exports.addComment = (username, body, review_id) => {
-  console.log(body);
   if (!username || !body) {
     return Promise.reject({
       status: 400,

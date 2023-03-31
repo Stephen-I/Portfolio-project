@@ -1,4 +1,8 @@
-const { seeCommentsById, addComment } = require("../models/comment.model");
+const {
+  seeCommentsById,
+  addComment,
+  removeComment,
+} = require("../models/comment.model");
 const { seeReviewsById } = require("../models/review.model");
 
 exports.viewComments = (req, res, next) => {
