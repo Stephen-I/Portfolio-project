@@ -24,4 +24,8 @@ exports.groupReviewsAndComments = () => {
     .then(({ rows }) => rows);
 };
 
-exports.modifyReview = () => {};
+exports.modifyReview = () => {
+  return db.query(
+    "UPDATE reviews SET votes = 0, inc_votes = inc_votes + newVote WHERE  RETURNING *;"
+  );
+};
