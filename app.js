@@ -6,7 +6,10 @@ const {
   getMessage,
 } = require("./controllers/category.controller");
 
-const { viewComments } = require("./controllers/comment.controller");
+const {
+  viewComments,
+  insertComment,
+} = require("./controllers/comment.controller");
 
 const {
   viewReviewsById,
@@ -25,6 +28,8 @@ app.get("/api/reviews/:review_id", viewReviewsById);
 app.get("/api/reviews", countComments);
 
 app.get("/api/reviews/:review_id/comments", viewComments);
+
+app.post("/api/reviews/:review_id/comments", insertComment);
 
 app.get("/*", notFoundErr);
 

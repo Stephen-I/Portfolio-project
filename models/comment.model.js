@@ -22,3 +22,15 @@ exports.seeCommentsById = (review_id) => {
       return comment;
     });
 };
+
+exports.addComment = (username, body) => {
+  return db
+    .query("INSERT INTO comments (author, body) VALUES ($1, $2) RETURNING *;", [
+      username,
+      body,
+    ])
+    .then(({ rows }) => {
+      rows[0];
+      console.log(rows);
+    });
+};
