@@ -9,6 +9,7 @@ const {
 const {
   viewComments,
   insertComments,
+  deleteComments,
 } = require("./controllers/comment.controller");
 
 const {
