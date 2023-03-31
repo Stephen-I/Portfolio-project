@@ -8,7 +8,7 @@ const {
 
 const {
   viewComments,
-  insertComment,
+  insertComments,
 } = require("./controllers/comment.controller");
 
 const {
@@ -17,7 +17,7 @@ const {
   countComments,
 } = require("./controllers/review.controller");
 
-// app.use(express.json());
+app.use(express.json());
 
 app.get("/api", getMessage);
 
@@ -29,7 +29,7 @@ app.get("/api/reviews", countComments);
 
 app.get("/api/reviews/:review_id/comments", viewComments);
 
-app.post("/api/reviews/:review_id/comments", insertComment);
+app.post("/api/reviews/:review_id/comments", insertComments);
 
 app.get("/*", notFoundErr);
 

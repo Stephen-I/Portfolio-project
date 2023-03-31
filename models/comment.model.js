@@ -23,14 +23,13 @@ exports.seeCommentsById = (review_id) => {
     });
 };
 
-exports.addComment = (username, body) => {
+exports.addComment = (username, body, review_id) => {
   return db
-    .query("INSERT INTO comments (author, body) VALUES ($1, $2) RETURNING *;", [
-      username,
-      body,
-    ])
+    .query(
+      "INSERT INTO comments (author, body, review_id) VALUES ($1, $2, $3) RETURNING *;",
+      [username, body, review_id]
+    )
     .then(({ rows }) => {
-      rows[0];
-      console.log(rows);
+      return rows[0];
     });
 };

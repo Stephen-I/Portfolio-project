@@ -146,15 +146,14 @@ describe("/api/app", () => {
         expect(body.msg).toBe("No reviews found for review_id: 10000");
       });
   });
-  //   test("Post a new entry into the comment", () => {
-  //     return request(app)
-  //       .post("/api/reviews/5/comments")
-  //       .expect(201)
-  //       .then(({ body }) => {
-  //         body.comments.forEach((comment) => {
-  //           expect(comment).toHaveProperty("author");
-  //           expect(comment).toHaveProperty("body");
-  //         });
-  //       });
-  //   });
+  test("Post a new entry into the comment", () => {
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send({ author: "mallionaire", body: "hi i'm mallionaire" })
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.comment).toHaveProperty("author");
+        expect(body.comment).toHaveProperty("body");
+      });
+  });
 });

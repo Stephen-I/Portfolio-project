@@ -7,11 +7,10 @@ exports.viewComments = (req, res, next) => {
     .catch(next);
 };
 
-exports.insertComment = (req, res) => {
-  addComment(req.body).then((comment) =>
-    res.status(201).send({
-      comment,
-      message: "comment added successfully",
-    })
-  );
+exports.insertComments = (req, res, next) => {
+  const { review_id } = req.params;
+  const { author, body } = req.body;
+  addComment(author, body, review_id).then((comment) => {
+    res.status(201).send({ comment });
+  });
 };
