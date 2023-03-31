@@ -8,8 +8,7 @@ exports.viewComments = (req, res, next) => {
 };
 
 exports.insertComment = (req, res) => {
-  const { username, body } = req.body;
-  addComment(username, body).then((comment) =>
+  addComment(req.body).then((comment) =>
     res.status(201).send({
       comment,
       message: "comment added successfully",
