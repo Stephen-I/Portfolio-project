@@ -31,6 +31,8 @@ app.get("/api/reviews/:review_id/comments", viewComments);
 
 app.post("/api/reviews/:review_id/comments", insertComments);
 
+app.delete("/api/comments/:comment_id", deleteComments);
+
 app.get("/*", notFoundErr);
 
 app.use((err, req, res, next) => {
