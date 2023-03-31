@@ -26,6 +26,8 @@ app.get("/api/reviews", countComments);
 
 app.get("/api/reviews/:review_id/comments", viewComments);
 
+app.patch("/api/reviews/:review_id");
+
 app.get("/*", notFoundErr);
 
 app.use((err, req, res, next) => {

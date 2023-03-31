@@ -23,3 +23,5 @@ exports.groupReviewsAndComments = () => {
     )
     .then(({ rows }) => rows);
 };
+
+exports.modifyReview = () => {};
