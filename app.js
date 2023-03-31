@@ -6,7 +6,10 @@ const {
   getMessage,
 } = require("./controllers/category.controller");
 
-const { viewComments } = require("./controllers/comment.controller");
+const {
+  viewComments,
+  insertComments,
+} = require("./controllers/comment.controller");
 
 const {
   viewReviewsById,
@@ -14,7 +17,7 @@ const {
   countComments,
 } = require("./controllers/review.controller");
 
-// app.use(express.json());
+app.use(express.json());
 
 app.get("/api", getMessage);
 
@@ -25,6 +28,8 @@ app.get("/api/reviews/:review_id", viewReviewsById);
 app.get("/api/reviews", countComments);
 
 app.get("/api/reviews/:review_id/comments", viewComments);
+
+app.post("/api/reviews/:review_id/comments", insertComments);
 
 app.get("/*", notFoundErr);
 

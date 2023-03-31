@@ -147,3 +147,76 @@ describe("/api/app", () => {
       });
   });
 });
+
+describe(".post", () => {
+  test("Post a new entry into the comment", () => {
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send({ username: "mallionaire", body: "hi i'm mallionaire" })
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.comment).toHaveProperty("author");
+        expect(body.comment).toHaveProperty("body");
+        expect(body.comment).toHaveProperty("comment_id");
+        expect(body.comment).toHaveProperty("review_id");
+        expect(body.comment).toHaveProperty("votes");
+        expect(body.comment).toHaveProperty("created_at");
+        expect(body.comment.author).toBe("mallionaire");
+        expect(body.comment.body).toBe("hi i'm mallionaire");
+      });
+  });
+  test("ignore extra properties", () => {
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send({ username: "mallionaire", body: "hi i'm mallionaire", dog: true })
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.comment).toHaveProperty("author");
+        expect(body.comment).toHaveProperty("body");
+        expect(body.comment).toHaveProperty("comment_id");
+        expect(body.comment).toHaveProperty("review_id");
+        expect(body.comment).toHaveProperty("votes");
+        expect(body.comment).toHaveProperty("created_at");
+        expect(body.comment.author).toBe("mallionaire");
+        expect(body.comment.body).toBe("hi i'm mallionaire");
+      });
+  });
+  test("If body is missing, display 500 error", () => {
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send({ username: "mallionaire" })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Missing required input");
+      });
+  });
+  test("if username is missing, display 500 error", () => {
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send({ body: "hi i'm mallionaire" })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Missing required input");
+      });
+  });
+  test("status:400, responds with an error message when passed a bad user ID", () => {
+    return request(app)
+      .post("/api/reviews/notAnID/comments")
+      .send({ username: "mallionaire", body: "hi i'm mallionaire" })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe(
+          'invalid input syntax for type integer: "notAnID"'
+        );
+      });
+  });
+  test("status:404, responds with an error message when passed unavailable ID", () => {
+    return request(app)
+      .post("/api/reviews/10000/comments")
+      .send({ username: "mallionaire", body: "hi i'm mallionaire" })
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("No review found for review_id: 10000");
+      });
+  });
+});
