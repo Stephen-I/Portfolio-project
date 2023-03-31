@@ -9,7 +9,9 @@ exports.viewComments = (req, res, next) => {
 
 exports.deleteComments = (req, res, next) => {
   const { comment_id } = req.params;
-  removeComment(comment_id).then(() => {
-    res.status(204);
-  });
+  removeComment(comment_id)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(next);
 };

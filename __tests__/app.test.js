@@ -146,13 +146,25 @@ describe("/api/app", () => {
         expect(body.msg).toBe("No reviews found for review_id: 10000");
       });
   });
-  //   test("Should delete specified comment and respond with 204 status", () => {
-  //     return request(app)
-  //       .delete("/api/comments/1")
-  //       .expect(204)
-  //       .then((body) => {
-  //         console.log(body);
-  //         expect(body.length).toBe(5);
-  //       });
-  //   });
+  test("Should delete specified comment and respond with 204 status", () => {
+    return request(app).delete("/api/comments/1").expect(204);
+  });
+  test("status:400, responds with an error message when passed a bad user ID", () => {
+    return request(app)
+      .delete("/api/comments/notAnID")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe(
+          'invalid input syntax for type integer: "notAnID"'
+        );
+      });
+  });
+  test("status:404, responds with an error message when passed unavailable ID", () => {
+    return request(app)
+      .delete("/api/comments/9999")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("No comments found for comment_id: 9999");
+      });
+  });
 });
