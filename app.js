@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const {
   viewCategories,
@@ -17,6 +18,8 @@ const {
   notFoundErr,
   countComments,
 } = require("./controllers/review.controller");
+
+app.use(cors());
 
 app.use(express.json());
 
