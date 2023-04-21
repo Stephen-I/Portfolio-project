@@ -24,4 +24,12 @@ exports.groupReviewsAndComments = () => {
     .then(({ rows }) => rows);
 };
 
-exports.reviewsByQuery = () => {};
+// exports.reviewsByQuery = () => {
+//   const queryValues = [];
+//   let queryStr = "SELECT * FROM table_name";
+
+//   if (reviews.category) {
+//     queryValues.push(reviews.category);
+//     queryStr += ` WHERE column_name = $1`;
+//   }
+// };
