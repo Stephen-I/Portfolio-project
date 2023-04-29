@@ -16,12 +16,18 @@ exports.seeReviewsById = (review_id) => {
     });
 };
 
-exports.groupReviewsAndComments = () => {
-  return db
-    .query(
-      "SELECT reviews.*, COUNT(reviews.review_id) AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id GROUP BY reviews.review_id;"
-    )
-    .then(({ rows }) => rows);
+exports.groupReviewsAndComments = (query) => {
+  const queryValues = ["category"];
+  const queryArr = [];
+  let queryStr =
+    "SELECT reviews.*, COUNT(reviews.review_id) AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id";
+  if (query) {
+    queryArr.push(query);
+    queryStr += ` WHERE category = $1`;
+  }
+  queryStr += " GROUP BY reviews.review_id";
+
+  return db.query(queryStr, queryArr).then(({ rows }) => rows);
 };
 
 // exports.reviewsByQuery = () => {

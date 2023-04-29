@@ -14,8 +14,9 @@ exports.notFoundErr = (req, res, next) => {
   res.status(404).send({ msg: "Path not found" });
 };
 
-exports.countComments = (req, res, next) => {
-  groupReviewsAndComments()
+exports.fetchReviews = (req, res, next) => {
+  const { category } = req.query;
+  groupReviewsAndComments(category)
     .then((reviews) => res.status(200).send({ reviews }))
     .catch(next);
 };

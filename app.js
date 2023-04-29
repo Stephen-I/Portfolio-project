@@ -16,7 +16,7 @@ const {
 const {
   viewReviewsById,
   notFoundErr,
-  countComments,
+  fetchReviews,
 } = require("./controllers/review.controller");
 
 app.use(cors());
@@ -29,7 +29,7 @@ app.get("/api/categories", viewCategories);
 
 app.get("/api/reviews/:review_id", viewReviewsById);
 
-app.get("/api/reviews", countComments);
+app.get("/api/reviews", fetchReviews);
 
 app.get("/api/reviews/:review_id/comments", viewComments);
 

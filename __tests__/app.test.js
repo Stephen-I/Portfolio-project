@@ -104,6 +104,16 @@ describe("/api/app", () => {
         });
       });
   });
+  test("Reviews should have properties of title, designer, review_body, review_id, review_img_url, votes, owner, created_at, category, comment_count", () => {
+    return request(app)
+      .get("/api/reviews?category=dexterity")
+      .expect(200)
+      .then(({ body }) => {
+        body.reviews.forEach((review) => {
+          expect(review.category).toBe("dexterity");
+        });
+      });
+  });
   test("Search for Comments using review_id with properties of body, review_id, votes, comment_id, created_at, author", () => {
     return request(app)
       .get("/api/reviews/3/comments")
