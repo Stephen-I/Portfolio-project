@@ -104,13 +104,24 @@ describe("/api/app", () => {
         });
       });
   });
-  test("Reviews should have properties of title, designer, review_body, review_id, review_img_url, votes, owner, created_at, category, comment_count", () => {
+  test("check category eqauls inputed query", () => {
     return request(app)
       .get("/api/reviews?category=dexterity")
       .expect(200)
       .then(({ body }) => {
         body.reviews.forEach((review) => {
           expect(review.category).toBe("dexterity");
+        });
+      });
+  });
+  test("reviews are ordered vy value of sort_by", () => {
+    return request(app)
+      .get("/api/reviews?sort_by=created_at")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.reviews).toBeSortedBy("created_at", {
+          descending: true,
+          coerce: true,
         });
       });
   });

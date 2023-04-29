@@ -15,8 +15,8 @@ exports.notFoundErr = (req, res, next) => {
 };
 
 exports.fetchReviews = (req, res, next) => {
-  const { category } = req.query;
-  groupReviewsAndComments(category)
+  const { category, sort_by = "created_at" } = req.query;
+  groupReviewsAndComments(category, sort_by)
     .then((reviews) => res.status(200).send({ reviews }))
     .catch(next);
 };
